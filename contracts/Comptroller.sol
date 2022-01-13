@@ -1256,14 +1256,14 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
      * @return The amount of COMP which was NOT transferred to the user
      */
     function transferComp(address user, uint userAccrued, uint threshold) internal returns (uint) {
-        if (userAccrued >= threshold && userAccrued > 0) {
-            Comp comp = Comp(getCompAddress());
-            uint compRemaining = comp.balanceOf(address(this));
-            if (userAccrued <= compRemaining) {
-                comp.transfer(user, userAccrued);
-                return 0;
-            }
-        }
+        // if (userAccrued >= threshold && userAccrued > 0) {
+        //     Comp comp = Comp(getCompAddress());
+        //     uint compRemaining = comp.balanceOf(address(this));
+        //     if (userAccrued <= compRemaining) {
+        //         comp.transfer(user, userAccrued);
+        //         return 0;
+        //     }
+        // }
         return userAccrued;
     }
 
@@ -1400,6 +1400,6 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
      * @return The address of COMP
      */
     function getCompAddress() public view returns (address) {
-        return 0x0000000000000000000000000000000000000000;
+        return 0x0Ed0Ca6872073E02cd3aE005BaF04bA43BE947fA;
     }
 }
