@@ -121,3 +121,5 @@ typechain
 
 .vscode/
 truffle-config.*
+
+.DS_Store
