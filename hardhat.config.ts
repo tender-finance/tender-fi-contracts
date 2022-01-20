@@ -12,10 +12,6 @@ const config: HardhatUserConfig = {
       url: process.env["METIS_RPC"] || "https://andromeda.metis.io/?owner=1088",
       accounts: [process.env["PRIVATE_KEY"]],
     },
-    kovan: {
-      url: process.env["KOVAN_RPC"] || "https://kovan.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
-      accounts: [process.env["Privatkey_testing"]],
-    },
   },
   etherscan: {
     apiKey: process.env["ETHERSCAN_API_KEY"],
