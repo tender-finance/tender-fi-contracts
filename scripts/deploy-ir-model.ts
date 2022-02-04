@@ -7,8 +7,8 @@ const outputFilePath = `./deployments/${hre.network.name}.json`;
 
 // IR Model Params
 const params = {
-  baseRate: "2",
-  multiplier: "20",
+  baseRate: "0",
+  multiplier: "1500",
 }
 
 async function main() {
@@ -22,11 +22,14 @@ async function main() {
   const WhitePaperInterestRateModel = await hre.ethers.getContractFactory("WhitePaperInterestRateModel");
   const whitePaperInterestRateModel = await WhitePaperInterestRateModel.deploy(baseRate, multiplier);
   await whitePaperInterestRateModel.deployed();
-  console.log("WhitePaperInterestRateModel deployed to:", whitePaperInterestRateModel.address);
+
+  const blocksPerYearIRModel = (await whitePaperInterestRateModel.blocksPerYear()).toString();
+  console.log(`WhitePaperInterestRateModel deployed to: ${whitePaperInterestRateModel.address} with ${blocksPerYearIRModel} blocks per year.`);
 
   // save data
   if (!deployments["IRModels"]) deployments["IRModels"] = {};
-  deployments["IRModels"][`${params.baseRate}__${params.multiplier}`] = whitePaperInterestRateModel.address;
+  if (!deployments["IRModels"][blocksPerYearIRModel]) deployments["IRModels"][blocksPerYearIRModel] = {};
+  deployments["IRModels"][blocksPerYearIRModel][`${params.baseRate}__${params.multiplier}`] = whitePaperInterestRateModel.address;
   writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
 }
 
