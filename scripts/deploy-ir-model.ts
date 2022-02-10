@@ -28,8 +28,12 @@ async function main() {
 
   // save data
   if (!deployments["IRModels"]) deployments["IRModels"] = {};
-  if (!deployments["IRModels"][blocksPerYearIRModel]) deployments["IRModels"][blocksPerYearIRModel] = {};
-  deployments["IRModels"][blocksPerYearIRModel][`${params.baseRate}__${params.multiplier}`] = whitePaperInterestRateModel.address;
+  if (!deployments["IRModels"]["WhitePaperInterestRateModel"]) deployments["IRModels"]["WhitePaperInterestRateModel"] = {};
+  if (!deployments["IRModels"]["WhitePaperInterestRateModel"][blocksPerYearIRModel])
+    deployments["IRModels"]["WhitePaperInterestRateModel"][blocksPerYearIRModel] = {};
+
+  deployments["IRModels"]["WhitePaperInterestRateModel"][blocksPerYearIRModel]
+    [`${params.baseRate}__${params.multiplier}`] = whitePaperInterestRateModel.address;
   writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
 }
 

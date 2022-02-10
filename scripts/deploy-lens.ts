@@ -15,7 +15,7 @@ async function main() {
   console.log("Comptroller deployed to:", compoundLens.address);
 
   // save data
-  deployments["compoundLens"] = compoundLens.address;
+  deployments["CompoundLens"] = compoundLens.address;
   writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
 }
 
