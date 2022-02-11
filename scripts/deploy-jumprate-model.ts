@@ -9,8 +9,8 @@ const outputFilePath = `./deployments/${hre.network.name}.json`;
 const params = {
   baseRate: "0",
   kink: "80",
-  multiplierPreKink: "50",
-  multiplierPostKink: "1000",
+  multiplierPreKink: "20",
+  multiplierPostKink: "100",
   admin: "0x7EBCE9a6fcb4552e59d85667391509A4EF1476D2",
 }
 
