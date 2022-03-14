@@ -1,25 +1,20 @@
 import hre from "hardhat";
-import { readFileSync, writeFileSync } from "fs";
 import { numToWei } from "../utils/ethUnitParser";
 import { toBn } from "../utils/bn";
 
-const outputFilePath = `./deployments/${hre.network.name}.json`;
-
 // IR Model Params
 const params = {
-  blocksPerYear: "17000000",
+  address: "0x0000",
+  blocksPerYear: "12000000",
   baseRate: "0",
   kink: "80",
-  multiplierPreKink: "50",
-  multiplierPostKink: "1000",
-  admin: "0x7EBCE9a6fcb4552e59d85667391509A4EF1476D2",
+  multiplierPreKink: "20",
+  multiplierPostKink: "100",
 }
 
 async function main() {
   const [deployer] = await hre.ethers.getSigners();
-  console.log(`>>>>>>>>>>>> Deployer: ${deployer.address} <<<<<<<<<<<<\n`);
-
-  const deployments = JSON.parse(readFileSync(outputFilePath, "utf-8"));
+  console.log(`>>>>>>>>>>>> Account: ${deployer.address} <<<<<<<<<<<<\n`);
 
   const jumpMultiplier = getJumpMultiplier(params.kink, params.multiplierPreKink, params.multiplierPostKink);
 
@@ -28,26 +23,17 @@ async function main() {
   const multiplierWei = numToWei(toBn(params.multiplierPreKink).div(100), 18);
   const jumpMultiplierWei = numToWei(toBn(jumpMultiplier).div(100), 18);
 
-  const JumpRateModelV2 = await hre.ethers.getContractFactory("JumpRateModelV2");
-  const jumpRateModelV2 = await JumpRateModelV2.deploy(
+  const jumpRateModelV2 = await hre.ethers.getContractAt("JumpRateModelV2", params.address);
+  const tx = await jumpRateModelV2.updateJumpRateModel(
     params.blocksPerYear,
     baseRateWei,
     multiplierWei,
     jumpMultiplierWei,
     kinkWei,
-    params.admin,
   );
-  await jumpRateModelV2.deployed();
+  await tx.wait();
 
-  console.log(`JumpRateModelV2 deployed to: ${jumpRateModelV2.address}.`);
-
-  // save data
-  if (!deployments["IRModels"]) deployments["IRModels"] = {};
-  if (!deployments["IRModels"]["JumpRateModelV2"]) deployments["IRModels"]["JumpRateModelV2"] = {};
-
-  deployments["IRModels"]["JumpRateModelV2"]
-  [`${params.baseRate}__${params.kink}__${params.multiplierPreKink}__${params.multiplierPostKink}`] = jumpRateModelV2.address;
-  writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
+  console.log(`JumpRateModelV2 updated in txn: ${tx.hash}.`);
 }
 
 const getJumpMultiplier = (kink: string, multiplierPreKink: string, multiplierPostKink: string): string => {
