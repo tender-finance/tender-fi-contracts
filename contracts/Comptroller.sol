@@ -75,7 +75,7 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
     uint internal constant closeFactorMaxMantissa = 0.9e18; // 0.9
 
     // No collateralFactorMantissa may exceed this value
-    uint internal constant collateralFactorMaxMantissa = 1.0e18; // 1.0
+    uint internal constant collateralFactorMaxMantissa = 0.9e18; // 0.9
 
     // liquidationIncentiveMantissa must be no less than this value
     uint internal constant liquidationIncentiveMinMantissa = 1.0e18; // 1.0
@@ -1256,14 +1256,14 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
      * @return The amount of COMP which was NOT transferred to the user
      */
     function transferComp(address user, uint userAccrued, uint threshold) internal returns (uint) {
-        // if (userAccrued >= threshold && userAccrued > 0) {
-        //     Comp comp = Comp(getCompAddress());
-        //     uint compRemaining = comp.balanceOf(address(this));
-        //     if (userAccrued <= compRemaining) {
-        //         comp.transfer(user, userAccrued);
-        //         return 0;
-        //     }
-        // }
+        if (userAccrued >= threshold && userAccrued > 0) {
+            Comp comp = Comp(getCompAddress());
+            uint compRemaining = comp.balanceOf(address(this));
+            if (userAccrued <= compRemaining) {
+                comp.transfer(user, userAccrued);
+                return 0;
+            }
+        }
         return userAccrued;
     }
 
