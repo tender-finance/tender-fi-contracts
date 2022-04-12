@@ -1185,22 +1185,22 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
      * @param cToken The market whose borrow index to update
      */
     function updateCompBorrowIndex(address cToken, Exp memory marketBorrowIndex) internal {
-        CompMarketState storage borrowState = compBorrowState[cToken];
-        uint borrowSpeed = compSpeeds[cToken];
-        uint blockNumber = getBlockNumber();
-        uint deltaBlocks = sub_(blockNumber, uint(borrowState.block));
-        if (deltaBlocks > 0 && borrowSpeed > 0) {
-            uint borrowAmount = div_(CToken(cToken).totalBorrows(), marketBorrowIndex);
-            uint compAccrued = mul_(deltaBlocks, borrowSpeed);
-            Double memory ratio = borrowAmount > 0 ? fraction(compAccrued, borrowAmount) : Double({mantissa: 0});
-            Double memory index = add_(Double({mantissa: borrowState.index}), ratio);
-            compBorrowState[cToken] = CompMarketState({
-                index: safe224(index.mantissa, "new index exceeds 224 bits"),
-                block: safe32(blockNumber, "block number exceeds 32 bits")
-            });
-        } else if (deltaBlocks > 0) {
-            borrowState.block = safe32(blockNumber, "block number exceeds 32 bits");
-        }
+        // CompMarketState storage borrowState = compBorrowState[cToken];
+        // uint borrowSpeed = compSpeeds[cToken];
+        // uint blockNumber = getBlockNumber();
+        // uint deltaBlocks = sub_(blockNumber, uint(borrowState.block));
+        // if (deltaBlocks > 0 && borrowSpeed > 0) {
+        //     uint borrowAmount = div_(CToken(cToken).totalBorrows(), marketBorrowIndex);
+        //     uint compAccrued = mul_(deltaBlocks, borrowSpeed);
+        //     Double memory ratio = borrowAmount > 0 ? fraction(compAccrued, borrowAmount) : Double({mantissa: 0});
+        //     Double memory index = add_(Double({mantissa: borrowState.index}), ratio);
+        //     compBorrowState[cToken] = CompMarketState({
+        //         index: safe224(index.mantissa, "new index exceeds 224 bits"),
+        //         block: safe32(blockNumber, "block number exceeds 32 bits")
+        //     });
+        // } else if (deltaBlocks > 0) {
+        //     borrowState.block = safe32(blockNumber, "block number exceeds 32 bits");
+        // }
     }
 
     /**
@@ -1233,19 +1233,19 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
      * @param borrower The address of the borrower to distribute COMP to
      */
     function distributeBorrowerComp(address cToken, address borrower, Exp memory marketBorrowIndex, bool distributeAll) internal {
-        CompMarketState storage borrowState = compBorrowState[cToken];
-        Double memory borrowIndex = Double({mantissa: borrowState.index});
-        Double memory borrowerIndex = Double({mantissa: compBorrowerIndex[cToken][borrower]});
-        compBorrowerIndex[cToken][borrower] = borrowIndex.mantissa;
+        // CompMarketState storage borrowState = compBorrowState[cToken];
+        // Double memory borrowIndex = Double({mantissa: borrowState.index});
+        // Double memory borrowerIndex = Double({mantissa: compBorrowerIndex[cToken][borrower]});
+        // compBorrowerIndex[cToken][borrower] = borrowIndex.mantissa;
 
-        if (borrowerIndex.mantissa > 0) {
-            Double memory deltaIndex = sub_(borrowIndex, borrowerIndex);
-            uint borrowerAmount = div_(CToken(cToken).borrowBalanceStored(borrower), marketBorrowIndex);
-            uint borrowerDelta = mul_(borrowerAmount, deltaIndex);
-            uint borrowerAccrued = add_(compAccrued[borrower], borrowerDelta);
-            compAccrued[borrower] = transferComp(borrower, borrowerAccrued, distributeAll ? 0 : compClaimThreshold);
-            emit DistributedBorrowerComp(CToken(cToken), borrower, borrowerDelta, borrowIndex.mantissa);
-        }
+        // if (borrowerIndex.mantissa > 0) {
+        //     Double memory deltaIndex = sub_(borrowIndex, borrowerIndex);
+        //     uint borrowerAmount = div_(CToken(cToken).borrowBalanceStored(borrower), marketBorrowIndex);
+        //     uint borrowerDelta = mul_(borrowerAmount, deltaIndex);
+        //     uint borrowerAccrued = add_(compAccrued[borrower], borrowerDelta);
+        //     compAccrued[borrower] = transferComp(borrower, borrowerAccrued, distributeAll ? 0 : compClaimThreshold);
+        //     emit DistributedBorrowerComp(CToken(cToken), borrower, borrowerDelta, borrowIndex.mantissa);
+        // }
     }
 
     /**
@@ -1358,12 +1358,12 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
             });
         }
 
-        if (compBorrowState[cToken].index == 0 && compBorrowState[cToken].block == 0) {
-            compBorrowState[cToken] = CompMarketState({
-                index: compInitialIndex,
-                block: safe32(getBlockNumber(), "block number exceeds 32 bits")
-            });
-        }
+        // if (compBorrowState[cToken].index == 0 && compBorrowState[cToken].block == 0) {
+        //     compBorrowState[cToken] = CompMarketState({
+        //         index: compInitialIndex,
+        //         block: safe32(getBlockNumber(), "block number exceeds 32 bits")
+        //     });
+        // }
     }
 
     /**

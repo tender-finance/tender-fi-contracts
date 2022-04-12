@@ -1,7 +1,7 @@
 {
   "AGORA": "0x0Ed0Ca6872073E02cd3aE005BaF04bA43BE947fA",
   "Unitroller": "0x3fe29D7412aCDade27e21f55a65a7ddcCE23d9B3",
-  "Comptroller": "0xa1A32078E5599792cc63BfCF321e4C738Bf2873e",
+  "Comptroller": "0x383DD7d9eea5224f88C7a6B6535B3118eBae9c8b",
   "CompoundLens": "0x263060AB5778908D9C3Bf82E72A47D2e28B23Fb9",
   "IRModels": {
     "JumpRateModelV2": {
