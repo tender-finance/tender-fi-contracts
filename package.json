@@ -10,11 +10,12 @@
     "build": "hardhat clean && hardhat compile",
     "compile": "hardhat compile",
     "clean": "hardhat clean",
-    "lint:sol": "solium -d contracts/ --fix"
+    "lint:sol": "solium -d contracts/ --fix",
+    "postinstall": "npx patch-package"
   },
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.0",
-    "@nomiclabs/hardhat-etherscan": "^2.1.7",
+    "@nomiclabs/hardhat-etherscan": "3.0.3",
     "@nomiclabs/hardhat-waffle": "^2.0.0",
     "@typechain/ethers-v5": "^7.0.1",
     "@typechain/hardhat": "^2.3.0",

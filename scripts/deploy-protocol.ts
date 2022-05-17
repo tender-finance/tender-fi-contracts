@@ -10,7 +10,7 @@ const params = {
   closeFactor: "0.5",
   liquidationIncentive: "1.05",
   oracle: "0xa5BE1a46BB24572066FD61BD752EA4B2B0e2dFc3",
-}
+};
 
 async function main() {
   const [deployer] = await hre.ethers.getSigners();
@@ -28,31 +28,38 @@ async function main() {
   await comptroller.deployed();
   console.log("Comptroller deployed to:", comptroller.address);
 
+  let confirmations = hre.network.name === "metis" ? 3 : 1;
   console.log("calling unitroller._setPendingImplementation()");
+
   let _tx = await unitroller._setPendingImplementation(comptroller.address);
-  await _tx.wait(3);
+  await _tx.wait(confirmations);
 
   console.log("calling comptroller._become()");
   _tx = await comptroller._become(unitroller.address);
-  await _tx.wait(3);
+  await _tx.wait(confirmations);
 
-  const unitrollerProxy = await ethers.getContractAt("Comptroller", unitroller.address);
+  const unitrollerProxy = await ethers.getContractAt(
+    "Comptroller",
+    unitroller.address
+  );
 
   console.log("calling unitrollerProxy._setMaxAssets()");
   _tx = await unitrollerProxy._setMaxAssets(params.maxAssets);
-  await _tx.wait(3);
+  await _tx.wait(confirmations);
 
   console.log("calling unitrollerProxy._setCloseFactor()");
   _tx = await unitrollerProxy._setCloseFactor(numToWei(params.closeFactor, 18));
-  await _tx.wait(3);
+  await _tx.wait(confirmations);
 
   console.log("calling unitrollerProxy._setLiquidationIncentive()");
-  _tx = await unitrollerProxy._setLiquidationIncentive(numToWei(params.liquidationIncentive, 18));
-  await _tx.wait(3);
+  _tx = await unitrollerProxy._setLiquidationIncentive(
+    numToWei(params.liquidationIncentive, 18)
+  );
+  await _tx.wait(confirmations);
 
   console.log("calling unitrollerProxy._setPriceOracle()");
   _tx = await unitrollerProxy._setPriceOracle(params.oracle);
-  await _tx.wait(3);
+  await _tx.wait(confirmations);
 
   // save data
   deployments["Unitroller"] = unitroller.address;
@@ -62,7 +69,7 @@ async function main() {
 
 main()
   .then(() => process.exit(0))
-  .catch(error => {
+  .catch((error) => {
     console.error(error);
     process.exit(1);
   });

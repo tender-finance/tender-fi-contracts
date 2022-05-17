@@ -12,8 +12,8 @@ const params = {
   kink: "80",
   multiplierPreKink: "50",
   multiplierPostKink: "1000",
-  admin: "0x7EBCE9a6fcb4552e59d85667391509A4EF1476D2",
-}
+  admin: "0x51129c8332A220E0bF9546A6Fe07481c17D2B638",
+};
 
 async function main() {
   const [deployer] = await hre.ethers.getSigners();
@@ -21,21 +21,27 @@ async function main() {
 
   const deployments = JSON.parse(readFileSync(outputFilePath, "utf-8"));
 
-  const jumpMultiplier = getJumpMultiplier(params.kink, params.multiplierPreKink, params.multiplierPostKink);
+  const jumpMultiplier = getJumpMultiplier(
+    params.kink,
+    params.multiplierPreKink,
+    params.multiplierPostKink
+  );
 
   const baseRateWei = numToWei(toBn(params.baseRate).div(100), 18);
   const kinkWei = numToWei(toBn(params.kink).div(100), 18);
   const multiplierWei = numToWei(toBn(params.multiplierPreKink).div(100), 18);
   const jumpMultiplierWei = numToWei(toBn(jumpMultiplier).div(100), 18);
 
-  const JumpRateModelV2 = await hre.ethers.getContractFactory("JumpRateModelV2");
+  const JumpRateModelV2 = await hre.ethers.getContractFactory(
+    "JumpRateModelV2"
+  );
   const jumpRateModelV2 = await JumpRateModelV2.deploy(
     params.blocksPerYear,
     baseRateWei,
     multiplierWei,
     jumpMultiplierWei,
     kinkWei,
-    params.admin,
+    params.admin
   );
   await jumpRateModelV2.deployed();
 
@@ -43,23 +49,30 @@ async function main() {
 
   // save data
   if (!deployments["IRModels"]) deployments["IRModels"] = {};
-  if (!deployments["IRModels"]["JumpRateModelV2"]) deployments["IRModels"]["JumpRateModelV2"] = {};
+  if (!deployments["IRModels"]["JumpRateModelV2"])
+    deployments["IRModels"]["JumpRateModelV2"] = {};
 
-  deployments["IRModels"]["JumpRateModelV2"]
-  [`${params.baseRate}__${params.kink}__${params.multiplierPreKink}__${params.multiplierPostKink}`] = jumpRateModelV2.address;
+  deployments["IRModels"]["JumpRateModelV2"][
+    `${params.baseRate}__${params.kink}__${params.multiplierPreKink}__${params.multiplierPostKink}`
+  ] = jumpRateModelV2.address;
   writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
 }
 
-const getJumpMultiplier = (kink: string, multiplierPreKink: string, multiplierPostKink: string): string => {
+const getJumpMultiplier = (
+  kink: string,
+  multiplierPreKink: string,
+  multiplierPostKink: string
+): string => {
   return toBn(multiplierPostKink)
     .minus(multiplierPreKink)
     .div(toBn(100).minus(kink))
-    .times(100).toFixed();
-}
+    .times(100)
+    .toFixed();
+};
 
 main()
   .then(() => process.exit(0))
-  .catch(error => {
+  .catch((error) => {
     console.error(error);
     process.exit(1);
   });
