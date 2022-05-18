@@ -35,13 +35,14 @@ export async function main() {
 
   const deployments = JSON.parse(readFileSync(outputFilePath, "utf-8"));
   const comptrollerAddress: string = deployments.Comptroller;
+  const unitrollerAddress: string = deployments.Unitroller;
   // TODO: This is fragile if the parameters change
   const irModelAddress: string =
     deployments.IRModels.WhitePaperInterestRateModel["6000000"]["0__1500"];
 
   const cErc20Immutable = await CErc20Immutable.deploy(
     params.underlying,
-    comptrollerAddress,
+    unitrollerAddress,
     irModelAddress,
     initialExcRateMantissaStr,
     params.name,

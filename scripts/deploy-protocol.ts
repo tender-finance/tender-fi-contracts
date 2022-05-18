@@ -10,7 +10,7 @@ const params = {
   closeFactor: "0.5",
   liquidationIncentive: "1.05",
   // TODO: What do we use here?
-  oracle: "0xa5BE1a46BB24572066FD61BD752EA4B2B0e2dFc3",
+  oracle: "0x5134EAF08bcf8cE1922991150AAad1774e93751f",
 };
 
 export async function main() {
