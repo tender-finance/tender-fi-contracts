@@ -1,15 +1,16 @@
 {
-  "Unitroller": "0x152c276A5167c0149fbCA0E45c50C9BD92c766Ce",
-  "Comptroller": "0xAb5e6011B22aC9bC3D5630F0e7Fbc6C1fEC44EfE",
-  "CompoundLens": "0x03dF7Dd7f6fcFcc5e2b6f3B6B50d30C99e122557",
+  "Unitroller": "0x237f8AB8B6b9012DB425A9780FE529f8E1ebB142",
+  "Comptroller": "0x5Ac2f52B4cc400Ba651E5eB3028811B26285d386",
+  "CompoundLens": "0x6FebdADAbf38aDdA590a9243f2420cA117e84a45",
   "IRModels": {
-    "JumpRateModelV2": {
-      "0__80__50__1000": "0xE2dEeD50F4Ce1758042C732B9D5dEDbd49b340d2"
-    },
     "WhitePaperInterestRateModel": {
       "6000000": {
-        "0__1500": "0x64938712914f80E9bea42a0cA272848D91fB3e02"
+        "0__1500": "0x1aBF1A27B98760f9e29E84C1c154d22adFDe3096"
       }
+    },
+    "JumpRateModelV2": {
+      "0__80__50__1000": "0xD2C22997256d95f22C4Fa735e6D0319A3526bDFE"
     }
-  }
+  },
+  "tMetis": "0x8A43f078752C0D8D7b158A30351718AFF9e9b067"
 }

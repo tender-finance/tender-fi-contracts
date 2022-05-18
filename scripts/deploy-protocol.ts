@@ -9,10 +9,11 @@ const params = {
   maxAssets: "20",
   closeFactor: "0.5",
   liquidationIncentive: "1.05",
+  // TODO: What do we use here?
   oracle: "0xa5BE1a46BB24572066FD61BD752EA4B2B0e2dFc3",
 };
 
-async function main() {
+export async function main() {
   const [deployer] = await hre.ethers.getSigners();
   console.log(`>>>>>>>>>>>> Deployer: ${deployer.address} <<<<<<<<<<<<\n`);
 
@@ -65,11 +66,45 @@ async function main() {
   deployments["Unitroller"] = unitroller.address;
   deployments["Comptroller"] = comptroller.address;
   writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
+
+  try {
+    await verifyContract(
+      "contracts/Unitroller.sol:Unitroller",
+      unitroller.address,
+      []
+    );
+  } catch (e) {
+    console.error("Error verifying Unitroller");
+    console.error(e);
+  }
+
+  try {
+    await verifyContract(
+      "contracts/Comptroller.sol:Comptroller",
+      comptroller.address,
+      []
+    );
+  } catch (e) {
+    console.error("Error verifying Comptroller");
+    console.error(e);
+  }
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
+const verifyContract = async (
+  contractName: string,
+  contractAddress: string,
+  constructorArgs: any
+) => {
+  await hre.run("verify:verify", {
+    contract: contractName,
+    address: contractAddress,
+    constructorArguments: constructorArgs,
   });
+};
+
+// main()
+//   .then(() => process.exit(0))
+//   .catch((error) => {
+//     console.error(error);
+//     process.exit(1);
+//   });

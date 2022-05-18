@@ -12,10 +12,10 @@ const params = {
   kink: "80",
   multiplierPreKink: "50",
   multiplierPostKink: "1000",
-  admin: "0x51129c8332A220E0bF9546A6Fe07481c17D2B638",
+  // admin: "0x51129c8332A220E0bF9546A6Fe07481c17D2B638",
 };
 
-async function main() {
+export async function main(adminWallet: string) {
   const [deployer] = await hre.ethers.getSigners();
   console.log(`>>>>>>>>>>>> Deployer: ${deployer.address} <<<<<<<<<<<<\n`);
 
@@ -41,7 +41,7 @@ async function main() {
     multiplierWei,
     jumpMultiplierWei,
     kinkWei,
-    params.admin
+    adminWallet
   );
   await jumpRateModelV2.deployed();
 
@@ -70,9 +70,9 @@ const getJumpMultiplier = (
     .toFixed();
 };
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+// main()
+//   .then(() => process.exit(0))
+//   .catch((error) => {
+//     console.error(error);
+//     process.exit(1);
+//   });
