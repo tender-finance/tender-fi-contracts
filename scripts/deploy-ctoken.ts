@@ -91,16 +91,16 @@ export async function main() {
   }
 }
 
-const verifyContract = async (
-  contractAddress: string,
-  constructorArgs: any
-) => {
-  await hre.run("verify:verify", {
-    contract: "contracts/CErc20Immutable.sol:CErc20Immutable",
-    address: contractAddress,
-    constructorArguments: constructorArgs,
-  });
-};
+// const verifyContract = async (
+//   contractAddress: string,
+//   constructorArgs: any
+// ) => {
+//   await hre.run("verify:verify", {
+//     contract: "contracts/CErc20Immutable.sol:CErc20Immutable",
+//     address: contractAddress,
+//     constructorArguments: constructorArgs,
+//   });
+// };
 
 // main()
 //   .then(() => process.exit(0))

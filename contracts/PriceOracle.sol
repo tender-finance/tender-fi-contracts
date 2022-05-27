@@ -28,4 +28,7 @@ contract PriceOracle {
     function setValue(uint _value) external{
       value = _value;
     }
+    function viewValue() public view returns (uint){
+      return(value);
+    }
 }

@@ -238,12 +238,13 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
         require(!mintGuardianPaused[cToken], "mint is paused");
 
         // Shh - currently unused
-        minter;
-        mintAmount;
+        
 
         if (!markets[cToken].isListed) {
             return uint(Error.MARKET_NOT_LISTED);
         }
+        minter;
+        mintAmount;
 
         // update the asset price 
         oracle.updatePrice(CToken(cToken));
