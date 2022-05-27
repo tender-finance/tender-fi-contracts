@@ -27,6 +27,25 @@ async function main() {
   // save data
   deployments["Comptroller"] = comptroller.address;
   writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
+
+  const verifyContract = async (
+    contractName: string,
+    contractAddress: string,
+    constructorArgs: any
+  ) => {
+    await hre.run("verify:verify", {
+      contract: contractName,
+      address: contractAddress,
+      constructorArguments: constructorArgs,
+    });
+  };
+
+  await verifyContract(
+    "contracts/Comptroller.sol:Comptroller",
+    comptroller.address,
+    []
+  );
+
 }
 
 main()

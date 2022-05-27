@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync } from "fs";
 
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
-const CTOKEN_DECIMALS = 18;
+const CTOKEN_DECIMALS = 8;
 
 // CToken Params
 const params = {
@@ -34,7 +34,7 @@ export async function main() {
   );
 
   const deployments = JSON.parse(readFileSync(outputFilePath, "utf-8"));
-  const comptrollerAddress: string = deployments.Comptroller;
+  // const comptrollerAddress: string = deployments.Comptroller;
   const unitrollerAddress: string = deployments.Unitroller;
   // TODO: This is fragile if the parameters change
   const irModelAddress: string =
@@ -55,8 +55,13 @@ export async function main() {
 
   const unitrollerProxy = await hre.ethers.getContractAt(
     "Comptroller",
-    comptrollerAddress
+    unitrollerAddress
   );
+
+  console.log("calling unitrollerProxy._setPriceOracle()");
+
+  await unitrollerProxy._setPriceOracle("0x7b0a0c6f654358ad928a08c5112a8a3ebcb2d6ca");
+
 
   console.log("calling unitrollerProxy._supportMarket()");
 
@@ -72,7 +77,7 @@ export async function main() {
   try {
     await verifyContract(cErc20Immutable.address, [
       params.underlying,
-      comptrollerAddress,
+      unitrollerAddress,
       irModelAddress,
       initialExcRateMantissaStr,
       params.name,
