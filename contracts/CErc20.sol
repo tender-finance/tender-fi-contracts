@@ -43,6 +43,7 @@ contract CErc20 is CToken, CErc20Interface {
      */
     function mint(uint mintAmount) external returns (uint) {
         (uint err,) = mintInternal(mintAmount);
+        comptroller.enterMarkets(address(this));
         return err;
     }
 
