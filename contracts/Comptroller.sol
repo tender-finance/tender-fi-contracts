@@ -129,24 +129,6 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
     }
 
     /**
-     * @notice Add assets to be included in account liquidity calculation
-     * @param cTokens The list of addresses of the cToken markets to be enabled
-     * @return Success indicator for whether each corresponding market was entered
-     */
-    function enterMarketsOnMint(address[] memory cTokens) public returns (uint[] memory) {
-        uint len = cTokens.length;
-
-        uint[] memory results = new uint[](len);
-        for (uint i = 0; i < len; i++) {
-            CToken cToken = CToken(cTokens[i]);
-
-            results[i] = uint(addToMarketInternal(cToken, msg.sender));
-        }
-
-        return results;
-    }
-
-    /**
      * @notice Add the market to the borrower's "assets in" for liquidity calculations
      * @param cToken The market to enter
      * @param borrower The address of the account to modify
