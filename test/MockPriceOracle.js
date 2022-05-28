@@ -20,7 +20,6 @@ describe("MockPriceOracle contract", function () {
       const contract = await MockFactory.deploy();
 
       const cTokenAddress = ethers.Wallet.createRandom().address;
-      // await contract.updatePrice(cTokenAddress, 10);
 
       expect(await contract.getUnderlyingPrice(cTokenAddress)).to.eq(0);
     });
