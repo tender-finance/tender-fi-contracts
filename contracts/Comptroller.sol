@@ -129,12 +129,69 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
     }
 
     /**
+     * @notice Add assets to be included in account liquidity calculation
+     * @param cTokens The list of addresses of the cToken markets to be enabled
+     * @return Success indicator for whether each corresponding market was entered
+     */
+    function enterMarketsOnMint(address[] memory cTokens) public returns (uint[] memory) {
+        uint len = cTokens.length;
+
+        uint[] memory results = new uint[](len);
+        for (uint i = 0; i < len; i++) {
+            CToken cToken = CToken(cTokens[i]);
+
+            results[i] = uint(addToMarketInternal(cToken, msg.sender));
+        }
+
+        return results;
+    }
+
+    /**
      * @notice Add the market to the borrower's "assets in" for liquidity calculations
      * @param cToken The market to enter
      * @param borrower The address of the account to modify
      * @return Success indicator for whether the market was entered
      */
     function addToMarketInternal(CToken cToken, address borrower) internal returns (Error) {
+        Market storage marketToJoin = markets[address(cToken)];
+
+        if (!marketToJoin.isListed) {
+            // market is not listed, cannot join
+            return Error.MARKET_NOT_LISTED;
+        }
+
+        if (marketToJoin.accountMembership[borrower] == true) {
+            // already joined
+            return Error.NO_ERROR;
+        }
+
+        if (accountAssets[borrower].length >= maxAssets)  {
+            // no space, cannot join
+            return Error.TOO_MANY_ASSETS;
+        }
+
+        // survived the gauntlet, add to list
+        // NOTE: we store these somewhat redundantly as a significant optimization
+        //  this avoids having to iterate through the list for the most common use cases
+        //  that is, only when we need to perform liquidity checks
+        //  and not whenever we want to check if an account is in a particular market
+        marketToJoin.accountMembership[borrower] = true;
+        accountAssets[borrower].push(cToken);
+
+        emit MarketEntered(cToken, borrower);
+
+        return Error.NO_ERROR;
+    }
+
+
+    /**
+     * @notice Add the market to the borrower's "assets in" for liquidity calculations
+     * @param cToken The market to enter
+     * @param borrower The address of the account to modify
+     * @return Success indicator for whether the market was entered
+     */
+    function addToMarketExternal(CToken cToken, address borrower) external returns (Error) {
+        require(msg.sender == cToken, "not cToken");
         Market storage marketToJoin = markets[address(cToken)];
 
         if (!marketToJoin.isListed) {
