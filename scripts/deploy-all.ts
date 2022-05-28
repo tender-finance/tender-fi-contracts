@@ -9,7 +9,7 @@ import { main as DeployCToken } from "./deploy-ctoken";
 
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
-const adminWallet = "0x51129c8332A220E0bF9546A6Fe07481c17D2B638";
+const adminWallet = "0x5B33EC561Cb20EaF7d5b41A9B68A690E2EBBc893";
 
 async function main() {
   // Reset the deployment address file
