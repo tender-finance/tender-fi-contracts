@@ -9,7 +9,10 @@ import { main as DeployCToken } from "./deploy-ctoken";
 
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
-const adminWallet = "0x5B33EC561Cb20EaF7d5b41A9B68A690E2EBBc893";
+//  Metis Main net
+// const adminWallet = "0x5B33EC561Cb20EaF7d5b41A9B68A690E2EBBc893";
+
+const adminWallet = "0x3CFC4bb53F29452A88805879740B87B98D94b933";
 
 async function main() {
   // Reset the deployment address file
