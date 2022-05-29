@@ -11,7 +11,7 @@ The changes from the original protocol are as follows:
 
 ### Contract Changes
 
-- TESTIES Token
+- AGORA Token
     - Diff file - [Comp.sol](Comp.sol.pdf/)
     - Token name, symbol and total supply are changed.
 - Comptroller
@@ -19,7 +19,7 @@ The changes from the original protocol are as follows:
     - `collateralFactorMaxMantissa` changed to 1 from 0.9
     - added `oracle.updatePrice(CToken(cToken));` statement to automatically sync the underlying asset's price before all mint, redeem, borrow and repayBorrow transactions.
     - Paused Agora token claiming for the initial phase of protocol launch.
-    - Added address of TESTIES token.
+    - Added address of AGORA token.
 - PriceOracle
     - Diff file - [PriceOracle.sol](PriceOracle.sol.pdf/)
     - Added `updatePrice()` function to the PriceOracle interface. 

@@ -12,7 +12,7 @@ Deployed & verified on Metis Andromeda network:
 
 | Contract      | Address |
 | ----------- | ----------- |
-| TESTIES Token      | [0x0Ed0Ca6872073E02cd3aE005BaF04bA43BE947fA](https://andromeda-explorer.metis.io/address/0x0Ed0Ca6872073E02cd3aE005BaF04bA43BE947fA/contracts)       |
+| AGORA Token      | [0x0Ed0Ca6872073E02cd3aE005BaF04bA43BE947fA](https://andromeda-explorer.metis.io/address/0x0Ed0Ca6872073E02cd3aE005BaF04bA43BE947fA/contracts)       |
 | Unitroller      | [0x3fe29D7412aCDade27e21f55a65a7ddcCE23d9B3](https://andromeda-explorer.metis.io/address/0x3fe29D7412aCDade27e21f55a65a7ddcCE23d9B3/contracts)       |
 | Comptroller      | [0x23B506bb881d709a0964F1E23Ca9e3b3bA8850A1](https://andromeda-explorer.metis.io/address/0x23B506bb881d709a0964F1E23Ca9e3b3bA8850A1/contracts)       |
 
