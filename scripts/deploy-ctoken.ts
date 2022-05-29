@@ -58,11 +58,6 @@ export async function main() {
     unitrollerAddress
   );
 
-  console.log("calling unitrollerProxy._setPriceOracle()");
-
-  await unitrollerProxy._setPriceOracle("0x7b0a0c6f654358ad928a08c5112a8a3ebcb2d6ca");
-
-
   console.log("calling unitrollerProxy._supportMarket()");
 
   await unitrollerProxy._supportMarket(cErc20Immutable.address);
