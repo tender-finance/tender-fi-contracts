@@ -9,11 +9,11 @@ const CTOKEN_DECIMALS = 8;
 
 // CToken Params
 const params = {
-  underlying: "0xEA32A96608495e54156Ae48931A7c20f0dcc1a21",
+  underlying: "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
   // comptroller: "0xAb5e6011B22aC9bC3D5630F0e7Fbc6C1fEC44EfE",
   // irModel: "0xE2dEeD50F4Ce1758042C732B9D5dEDbd49b340d2",
-  name: "pUSDC",
-  symbol: "pUSDC",
+  name: "tMetis",
+  symbol: "tMetis",
   decimals: CTOKEN_DECIMALS,
 };
 
@@ -69,37 +69,37 @@ export async function main() {
   deployments[params.symbol] = cErc20Immutable.address;
   writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
 
-  // try {
-  //   await verifyContract(cErc20Immutable.address, [
-  //     params.underlying,
-  //     unitrollerAddress,
-  //     irModelAddress,
-  //     initialExcRateMantissaStr,
-  //     params.name,
-  //     params.symbol,
-  //     params.decimals,
-  //     deployer.address,
-  //   ]);
-  // } catch (e) {
-  //   console.error("Error verifying cErc20Immutable", cErc20Immutable.address);
-  //   console.error(e);
-  // }
+  try {
+    await verifyContract(cErc20Immutable.address, [
+      params.underlying,
+      unitrollerAddress,
+      irModelAddress,
+      initialExcRateMantissaStr,
+      params.name,
+      params.symbol,
+      params.decimals,
+      deployer.address,
+    ]);
+  } catch (e) {
+    console.error("Error verifying cErc20Immutable", cErc20Immutable.address);
+    console.error(e);
+  }
 }
 
-// const verifyContract = async (
-//   contractAddress: string,
-//   constructorArgs: any
-// ) => {
-//   await hre.run("verify:verify", {
-//     contract: "contracts/CErc20Immutable.sol:CErc20Immutable",
-//     address: contractAddress,
-//     constructorArguments: constructorArgs,
-//   });
-// };
-
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
+const verifyContract = async (
+  contractAddress: string,
+  constructorArgs: any
+) => {
+  await hre.run("verify:verify", {
+    contract: "contracts/CErc20Immutable.sol:CErc20Immutable",
+    address: contractAddress,
+    constructorArguments: constructorArgs,
   });
+};
+
+// main()
+//   .then(() => process.exit(0))
+//   .catch((error) => {
+//     console.error(error);
+//     process.exit(1);
+//   });

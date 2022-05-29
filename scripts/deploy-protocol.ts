@@ -68,40 +68,40 @@ export async function main() {
   deployments["Comptroller"] = comptroller.address;
   writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
 
-  //   try {
-  //     await verifyContract(
-  //       "contracts/Unitroller.sol:Unitroller",
-  //       unitroller.address,
-  //       []
-  //     );
-  //   } catch (e) {
-  //     console.error("Error verifying Unitroller");
-  //     console.error(e);
-  //   }
+  try {
+    await verifyContract(
+      "contracts/Unitroller.sol:Unitroller",
+      unitroller.address,
+      []
+    );
+  } catch (e) {
+    console.error("Error verifying Unitroller");
+    console.error(e);
+  }
 
-  //   try {
-  //     await verifyContract(
-  //       "contracts/Comptroller.sol:Comptroller",
-  //       comptroller.address,
-  //       []
-  //     );
-  //   } catch (e) {
-  //     console.error("Error verifying Comptroller");
-  //     console.error(e);
-  //   }
+  try {
+    await verifyContract(
+      "contracts/Comptroller.sol:Comptroller",
+      comptroller.address,
+      []
+    );
+  } catch (e) {
+    console.error("Error verifying Comptroller");
+    console.error(e);
+  }
 }
 
-// const verifyContract = async (
-//   contractName: string,
-//   contractAddress: string,
-//   constructorArgs: any
-// ) => {
-//   await hre.run("verify:verify", {
-//     contract: contractName,
-//     address: contractAddress,
-//     constructorArguments: constructorArgs,
-//   });
-// };
+const verifyContract = async (
+  contractName: string,
+  contractAddress: string,
+  constructorArgs: any
+) => {
+  await hre.run("verify:verify", {
+    contract: contractName,
+    address: contractAddress,
+    constructorArguments: constructorArgs,
+  });
+};
 
 // main()
 //   .then(() => process.exit(0))
