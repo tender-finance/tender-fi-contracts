@@ -4,7 +4,7 @@ import { readFileSync } from "fs";
 
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
-// NOTE: we need to set colalteral factors after the price oracle
+// NOTE: we need to set collateral factors after the price oracle
 
 export async function main() {
     const deployments = JSON.parse(readFileSync(outputFilePath, "utf-8"));
