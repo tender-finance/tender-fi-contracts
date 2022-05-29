@@ -1,3 +1,4 @@
+deployments/*
 # Logs
 logs
 *.log

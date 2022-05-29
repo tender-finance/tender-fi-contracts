@@ -1,3 +1,5 @@
+import "./CToken.sol";
+
 pragma solidity ^0.5.16;
 
 contract MockPriceOracle {
@@ -7,11 +9,16 @@ contract MockPriceOracle {
 
     mapping(address => uint) public prices;
 
+    // this is a stub for the price oracle interface
+    function updatePrice(CToken cToken) external {
+
+    }
+    
     /**
       * @notice Update the price of an underlying asset
       * @param cToken The cToken to update the underlying price of
       */
-    function updatePrice(address cToken, uint price) external{
+    function mockUpdatePrice(address cToken, uint price) external{
       prices[cToken] = price;
     }
 

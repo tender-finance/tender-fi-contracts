@@ -11,7 +11,12 @@ import { main as SetMockOraclePrice } from "./set-mock-oracle-price";
 
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
-const adminWallet = "0x51129c8332A220E0bF9546A6Fe07481c17D2B638";
+const adminWallet = process.env.PUBLIC_KEY
+
+if (adminWallet === undefined) {
+  console.error("Please define your PUBLIC_KEY in .env");
+  process.exit(1);
+}
 
 async function main() {
   // Reset the deployment address file

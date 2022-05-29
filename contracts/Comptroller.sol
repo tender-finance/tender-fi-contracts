@@ -165,6 +165,18 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
         return Error.NO_ERROR;
     }
 
+
+    /**
+     * @notice Add the market to the borrower's "assets in" for liquidity calculations
+     * @param cToken The market to enter
+     * @param borrower The address of the account to modify
+     * @return Success indicator for whether the market was entered
+     */
+    function addToMarketExternal(address cToken, address borrower) external returns (uint) {
+        require(msg.sender == cToken, "not cToken");
+        return uint(addToMarketInternal(CToken(cToken), borrower));
+    }
+
     /**
      * @notice Removes asset from sender's account liquidity calculation
      * @dev Sender must not have an outstanding borrow balance in the asset,
@@ -238,12 +250,13 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
         require(!mintGuardianPaused[cToken], "mint is paused");
 
         // Shh - currently unused
-        minter;
-        mintAmount;
+        
 
         if (!markets[cToken].isListed) {
             return uint(Error.MARKET_NOT_LISTED);
         }
+        minter;
+        mintAmount;
 
         // update the asset price 
         oracle.updatePrice(CToken(cToken));

@@ -15,7 +15,7 @@ async function main() {
   console.log("Comp deployed to:", comp.address);
 
   // save data
-  deployments['AGORA'] = comp.address;
+  deployments['TESTIES'] = comp.address;
   writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
 }
 

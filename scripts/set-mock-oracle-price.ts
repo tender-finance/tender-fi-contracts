@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
-const OracleAbi = [`function updatePrice(address, uint) external`];
+const OracleAbi = [`function mockUpdatePrice(address, uint) external`];
 
 export async function main() {
   const [deployer] = await hre.ethers.getSigners();
@@ -28,7 +28,7 @@ export async function main() {
 
   console.log("Setting MockOracle price on tMetis", tMetisAddr);
 
-  let tx = await oracle.updatePrice(
+  let tx = await oracle.mockUpdatePrice(
     tMetisAddr,
     ethers.utils.parseUnits("19.00", 18)
   );

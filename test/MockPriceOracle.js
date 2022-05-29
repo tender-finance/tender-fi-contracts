@@ -2,13 +2,13 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
 describe("MockPriceOracle contract", function () {
-  describe("updatePrice()", async () => {
+  describe("mockUpdatePrice()", async () => {
     it("sets the price", async () => {
       const MockFactory = await ethers.getContractFactory("MockPriceOracle");
       const contract = await MockFactory.deploy();
 
       const cTokenAddress = ethers.Wallet.createRandom().address;
-      await contract.updatePrice(cTokenAddress, 10);
+      await contract.mockUpdatePrice(cTokenAddress, 10);
 
       expect(await contract.prices(cTokenAddress)).to.eq(10);
     });
@@ -29,7 +29,7 @@ describe("MockPriceOracle contract", function () {
       const contract = await MockFactory.deploy();
 
       const cTokenAddress = ethers.Wallet.createRandom().address;
-      await contract.updatePrice(cTokenAddress, 10);
+      await contract.mockUpdatePrice(cTokenAddress, 10);
 
       expect(await contract.getUnderlyingPrice(cTokenAddress)).to.eq(10);
     });
