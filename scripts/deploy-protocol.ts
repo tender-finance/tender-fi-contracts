@@ -9,8 +9,6 @@ const params = {
   maxAssets: "20",
   closeFactor: "0.5",
   liquidationIncentive: "1.05",
-  // TODO: What do we use here?
-  oracle: "0x5134EAF08bcf8cE1922991150AAad1774e93751f",
 };
 
 export async function main() {
@@ -58,8 +56,11 @@ export async function main() {
   );
   await _tx.wait(confirmations);
 
-  console.log("calling unitrollerProxy._setPriceOracle()");
-  _tx = await unitrollerProxy._setPriceOracle(params.oracle);
+  console.log(
+    "calling unitrollerProxy._setPriceOracle() with address",
+    deployments.PriceOracle
+  );
+  _tx = await unitrollerProxy._setPriceOracle(deployments.PriceOracle);
   await _tx.wait(confirmations);
 
   // save data

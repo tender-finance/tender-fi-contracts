@@ -11,7 +11,9 @@
     "compile": "hardhat compile",
     "clean": "hardhat clean",
     "lint:sol": "solium -d contracts/ --fix",
-    "postinstall": "npx patch-package"
+    "postinstall": "npx patch-package",
+    "test": "npx hardhat test",
+    "deploy-stardust": "npx hardhat run scripts/deploy-all.ts --network stardust"
   },
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.0",
