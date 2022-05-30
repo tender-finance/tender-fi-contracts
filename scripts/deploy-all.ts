@@ -8,7 +8,7 @@ import { main as DeployIrModel } from "./deploy-ir-model";
 import { main as DeployJumpModel } from "./deploy-jumprate-model";
 import { main as DeployCToken } from "./deploy-ctoken";
 import { main as SetMockOraclePrice } from "./set-mock-oracle-price";
-
+import { main as SetCollateralFactor } from "./set-cf"
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
 const adminWallet = process.env.PUBLIC_KEY
@@ -34,6 +34,9 @@ async function main() {
   await DeployCToken();
 
   await SetMockOraclePrice();
+
+  // SetCollateralFactor requires the price to be set first
+  await SetCollateralFactor()
 }
 
 main()

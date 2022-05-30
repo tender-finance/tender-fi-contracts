@@ -14,9 +14,8 @@ contract ComptrollerInterface {
 
     function exitMarket(address cToken) external returns (uint256);
 
-    function addToMarketExternal(address cToken, address borrower)
-        external
-        returns (uint);
+    function addToMarketExternal(address cToken, address underlying, address borrower)
+        external;
 
     /*** Policy Hooks ***/
 

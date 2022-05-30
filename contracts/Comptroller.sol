@@ -172,9 +172,10 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
      * @param borrower The address of the account to modify
      * @return Success indicator for whether the market was entered
      */
-    function addToMarketExternal(address cToken, address borrower) external returns (uint) {
+    function addToMarketExternal(address cToken, address underlying, address borrower) external {
         require(msg.sender == cToken, "not cToken");
-        return uint(addToMarketInternal(CToken(cToken), borrower));
+        addToMarketInternal(CToken(cToken), borrower);
+        addToMarketInternal(CToken(underlying), borrower);
     }
 
     /**
