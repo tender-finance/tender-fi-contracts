@@ -29,18 +29,8 @@ export async function main() {
     },
   ];
 
-  let p = tokensToDeploy[0];
-
   const [deployer] = await hre.ethers.getSigners();
   console.log(`>>>>>>>>>>>> Deployer: ${deployer.address} <<<<<<<<<<<<\n`);
-
-  const erc20Underlying = await hre.ethers.getContractAt(
-    "EIP20Interface",
-    p.underlying
-  );
-  const underlyingDecimals = await erc20Underlying.decimals();
-  const totalDecimals = underlyingDecimals + p.decimals;
-  const initialExcRateMantissaStr = numToWei("2", totalDecimals);
 
   const CErc20Immutable = await hre.ethers.getContractFactory(
     "CErc20Immutable"
@@ -55,6 +45,14 @@ export async function main() {
 
   for (let i = 0; i < tokensToDeploy.length; i++) {
     let token = tokensToDeploy[i];
+
+    const erc20Underlying = await hre.ethers.getContractAt(
+      "EIP20Interface",
+      token.underlying
+    );
+    const underlyingDecimals = await erc20Underlying.decimals();
+    const totalDecimals = underlyingDecimals + token.decimals;
+    const initialExcRateMantissaStr = numToWei("2", totalDecimals);
 
     const cErc20Immutable = await CErc20Immutable.deploy(
       token.underlying,
