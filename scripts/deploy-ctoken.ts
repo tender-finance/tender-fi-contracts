@@ -7,14 +7,6 @@ const outputFilePath = `./deployments/${hre.network.name}.json`;
 
 const CTOKEN_DECIMALS = 8;
 
-// CToken Params
-// const params = {
-//   underlying: "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
-//   name: "tMetis",
-//   symbol: "tMetis",
-//   decimals: CTOKEN_DECIMALS,
-// };
-
 export async function main() {
   const tokensToDeploy = [
     {

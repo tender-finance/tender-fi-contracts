@@ -25,9 +25,9 @@ export async function main() {
   );
 
   const addresses = {
-    [deployments.tMetis]: 19,
-    [deployments.bMetis]: 1,
-    [deployments.kMetis]: 2.5,
+    [deployments.tMetis]: "19",
+    [deployments.bMetis]: "1",
+    [deployments.kMetis]: "2.5",
   };
 
   console.log(addresses, "addresses");
@@ -39,7 +39,7 @@ export async function main() {
 
     let tx = await oracle.mockUpdatePrice(
       address,
-      ethers.utils.parseUnits("19.00", 18)
+      ethers.utils.parseUnits(value, 18)
     );
 
     let confirmations = hre.network.name === "metis" ? 3 : 1;
