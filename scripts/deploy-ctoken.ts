@@ -16,7 +16,7 @@ const CTOKEN_DECIMALS = 8;
 // };
 
 export async function main() {
-  const d = [
+  const tokensToDeploy = [
     {
       underlying: "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
       name: "tMetis",
@@ -37,7 +37,7 @@ export async function main() {
     },
   ];
 
-  let p = d[0];
+  let p = tokensToDeploy[0];
 
   const [deployer] = await hre.ethers.getSigners();
   console.log(`>>>>>>>>>>>> Deployer: ${deployer.address} <<<<<<<<<<<<\n`);
@@ -61,7 +61,9 @@ export async function main() {
   const irModelAddress: string =
     deployments.IRModels.WhitePaperInterestRateModel["6000000"]["0__1500"];
 
-  let tokens = d.forEach(async (token) => {
+  for (let i = 0; i < tokensToDeploy.length; i++) {
+    let token = tokensToDeploy[i];
+
     const cErc20Immutable = await CErc20Immutable.deploy(
       token.underlying,
       unitrollerAddress,
@@ -106,9 +108,7 @@ export async function main() {
       console.error("Error verifying cErc20Immutable", cErc20Immutable.address);
       console.error(e);
     }
-  });
-
-  // await Promise.all(tokens);
+  }
 }
 
 const verifyContract = async (

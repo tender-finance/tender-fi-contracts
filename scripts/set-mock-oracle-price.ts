@@ -24,16 +24,28 @@ export async function main() {
     hre.ethers.provider.getSigner()
   );
 
-  const tMetisAddr = deployments.tMetis;
+  const addresses = {
+    [deployments.tMetis]: 19,
+    [deployments.bMetis]: 1,
+    [deployments.kMetis]: 2.5,
+  };
 
-  console.log("Setting MockOracle price on tMetis", tMetisAddr);
+  console.log(addresses, "addresses");
 
-  let tx = await oracle.mockUpdatePrice(
-    tMetisAddr,
-    ethers.utils.parseUnits("19.00", 18)
-  );
-  let confirmations = hre.network.name === "metis" ? 3 : 1;
-  await tx.wait(confirmations);
+  for (let address in addresses) {
+    let value = addresses[address];
+
+    console.log("Setting MockOracle price on tMetis", address, value);
+
+    let tx = await oracle.mockUpdatePrice(
+      address,
+      ethers.utils.parseUnits("19.00", 18)
+    );
+
+    let confirmations = hre.network.name === "metis" ? 3 : 1;
+
+    await tx.wait(confirmations);
+  }
 }
 
 // main()
