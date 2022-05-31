@@ -2,33 +2,40 @@ import hre from "hardhat";
 import { numToWei } from "../utils/ethUnitParser";
 
 import { readFileSync, writeFileSync } from "fs";
+import { ethers } from "ethers";
 
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
 const CTOKEN_DECIMALS = 8;
 
-export async function main() {
-  const tokensToDeploy = [
-    {
-      underlying: "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
-      name: "tMetis",
-      symbol: "tMetis",
-      decimals: CTOKEN_DECIMALS,
-    },
-    {
-      underlying: "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
-      name: "bMetis",
-      symbol: "bMetis",
-      decimals: CTOKEN_DECIMALS,
-    },
-    {
-      underlying: "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
-      name: "kMetis",
-      symbol: "kMetis",
-      decimals: CTOKEN_DECIMALS,
-    },
-  ];
+export const CTOKENS = [
+  {
+    underlying: "0x5197487406336229a37D724710380278A1dca6b2",
+    name: "tTestDAI",
+    symbol: "tTestDAI",
+    decimals: CTOKEN_DECIMALS,
+    collateralFactor: ethers.utils.parseUnits("9", 17),
+    priceInUsd: "1",
+  },
+  {
+    underlying: "0xaD26Cc863cb1aaba691469246B4B4D65D951188e",
+    name: "tTestETH",
+    symbol: "tTestETH",
+    decimals: CTOKEN_DECIMALS,
+    collateralFactor: ethers.utils.parseUnits("7", 17),
+    priceInUsd: "1800",
+  },
+  {
+    underlying: "0xAE745689b84ed533580610504Fe4baf38BEfc2C8",
+    name: "tTestWBTC",
+    symbol: "tTestWBTC",
+    decimals: CTOKEN_DECIMALS,
+    collateralFactor: ethers.utils.parseUnits("1", 17),
+    priceInUsd: "29000",
+  },
+];
 
+export async function main() {
   const [deployer] = await hre.ethers.getSigners();
   console.log(`>>>>>>>>>>>> Deployer: ${deployer.address} <<<<<<<<<<<<\n`);
 
@@ -43,8 +50,8 @@ export async function main() {
   const irModelAddress: string =
     deployments.IRModels.WhitePaperInterestRateModel["6000000"]["0__1500"];
 
-  for (let i = 0; i < tokensToDeploy.length; i++) {
-    let token = tokensToDeploy[i];
+  for (let i = 0; i < CTOKENS.length; i++) {
+    let token = CTOKENS[i];
 
     const erc20Underlying = await hre.ethers.getContractAt(
       "EIP20Interface",
