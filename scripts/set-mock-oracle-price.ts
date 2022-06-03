@@ -1,6 +1,7 @@
 import hre from "hardhat";
 import { readFileSync } from "fs";
 import { ethers } from "ethers";
+import { CTOKENS } from "./deploy-ctoken";
 
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
@@ -24,16 +25,22 @@ export async function main() {
     hre.ethers.provider.getSigner()
   );
 
-  const tMetisAddr = deployments.tMetis;
+  for (let i = 0; i < CTOKENS.length; i++) {
+    let cToken = CTOKENS[i];
+    let address = deployments[cToken.symbol];
+    let value = cToken.priceInUsd;
 
-  console.log("Setting MockOracle price on tMetis", tMetisAddr);
+    console.log("Setting MockOracle price on tMetis", address, value);
 
-  let tx = await oracle.mockUpdatePrice(
-    tMetisAddr,
-    ethers.utils.parseUnits("19.00", 18)
-  );
-  let confirmations = hre.network.name === "metis" ? 3 : 1;
-  await tx.wait(confirmations);
+    let tx = await oracle.mockUpdatePrice(
+      address,
+      ethers.utils.parseUnits(value, 18)
+    );
+
+    let confirmations = hre.network.name === "metis" ? 3 : 1;
+
+    await tx.wait(confirmations);
+  }
 }
 
 // main()

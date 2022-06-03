@@ -8,10 +8,10 @@ import { main as DeployIrModel } from "./deploy-ir-model";
 import { main as DeployJumpModel } from "./deploy-jumprate-model";
 import { main as DeployCToken } from "./deploy-ctoken";
 import { main as SetMockOraclePrice } from "./set-mock-oracle-price";
-import { main as SetCollateralFactor } from "./set-cf"
+import { main as SetCollateralFactor } from "./set-cf";
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
-const adminWallet = process.env.PUBLIC_KEY
+const adminWallet = process.env.PUBLIC_KEY;
 
 if (adminWallet === undefined) {
   console.error("Please define your PUBLIC_KEY in .env");
@@ -36,7 +36,7 @@ async function main() {
   await SetMockOraclePrice();
 
   // SetCollateralFactor requires the price to be set first
-  await SetCollateralFactor()
+  await SetCollateralFactor();
 }
 
 main()

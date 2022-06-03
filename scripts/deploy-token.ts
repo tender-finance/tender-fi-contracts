@@ -15,13 +15,13 @@ async function main() {
   console.log("Comp deployed to:", comp.address);
 
   // save data
-  deployments['TESTIES'] = comp.address;
+  deployments["TESTIES"] = comp.address;
   writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch(error => {
-    console.error(error);
-    process.exit(1);
-  });
+// main()
+//   .then(() => process.exit(0))
+//   .catch(error => {
+//     console.error(error);
+//     process.exit(1);
+//   });
