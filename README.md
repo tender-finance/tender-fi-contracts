@@ -12,20 +12,21 @@ Deployed & verified on Metis Andromeda network:
 
 | Contract      | Address |
 | ----------- | ----------- |
-| AGORA Token      | [0x0Ed0Ca6872073E02cd3aE005BaF04bA43BE947fA](https://andromeda-explorer.metis.io/address/0x0Ed0Ca6872073E02cd3aE005BaF04bA43BE947fA/contracts)       |
-| Unitroller      | [0x3fe29D7412aCDade27e21f55a65a7ddcCE23d9B3](https://andromeda-explorer.metis.io/address/0x3fe29D7412aCDade27e21f55a65a7ddcCE23d9B3/contracts)       |
-| Comptroller      | [0x23B506bb881d709a0964F1E23Ca9e3b3bA8850A1](https://andromeda-explorer.metis.io/address/0x23B506bb881d709a0964F1E23Ca9e3b3bA8850A1/contracts)       |
+| Price Oracle      | [0x670f22666415A7aE45166151F9aa158BeC7C1549](https://andromeda-explorer.metis.io/address/0x670f22666415A7aE45166151F9aa158BeC7C1549/contracts)       |
+| Unitroller      | [0x798752C2cd661b3eA4B7A5b45041fA95AcE3fc02](https://andromeda-explorer.metis.io/address/0x798752C2cd661b3eA4B7A5b45041fA95AcE3fc02/contracts)       |
+| Comptroller      | [0xd186010231790CAe3e2f87Ba4982Bf5827B8819D](https://andromeda-explorer.metis.io/address/0xd186010231790CAe3e2f87Ba4982Bf5827B8819D/contracts)       |
 
 
 CTokens
 | Token      | Address |
 | ----------- | ----------- |
-| Metis      | [0xcFd482DcE13cA1d27834D381AF1b570E9E6C6810](https://andromeda-explorer.metis.io/address/0xcFd482DcE13cA1d27834D381AF1b570E9E6C6810/contracts)       |
-| USDC      | [0x6D11F074131E3FC61C983cCe538F5D0ca3553c0F](https://andromeda-explorer.metis.io/address/0x6D11F074131E3FC61C983cCe538F5D0ca3553c0F/contracts)       |
-| USDT      | [0x4b45B1905Cd1dC18eDad134d2E43f5043e1E157c](https://andromeda-explorer.metis.io/address/0x4b45B1905Cd1dC18eDad134d2E43f5043e1E157c/contracts)       |
-| WETH      | [0x2E9347dda00B3ec1b188963b590ca1eCBD73145A](https://andromeda-explorer.metis.io/address/0x2E9347dda00B3ec1b188963b590ca1eCBD73145A/contracts)       |
-| Netswap Token      | [0x5f87B34BFa147Ac23F25786Bba6C1b1b06B45dC8](https://andromeda-explorer.metis.io/address/0x5f87B34BFa147Ac23F25786Bba6C1b1b06B45dC8/contracts)       |
-| USDO      | [0x7759eeb5365E94428BF46A26567c49c25ee5b319](https://andromeda-explorer.metis.io/address/0x7759eeb5365E94428BF46A26567c49c25ee5b319/contracts)       |
+| Metis      | [0xB01f3D0F5dD254280aC64C89aFB3363d05b91658](https://andromeda-explorer.metis.io/address/0xB01f3D0F5dD254280aC64C89aFB3363d05b91658/contracts)       |
+| USDC      | [0x18320599eA58B19B3FE12d383F2969C61C1B43F4](https://andromeda-explorer.metis.io/address/0x18320599eA58B19B3FE12d383F2969C61C1B43F4/contracts)       |
+| USDT      | [0x2a0DDDb5783E5Cd27821148eDe1B4c90EA739025](https://andromeda-explorer.metis.io/address/0x2a0DDDb5783E5Cd27821148eDe1B4c90EA739025/
+| DAI      | [0x2a0DDDb5783E5Cd27821148eDe1B4c90EA739025](https://andromeda-explorer.metis.io/address/0x2a0DDDb5783E5Cd27821148eDe1B4c90EA739025/contracts)       |
+contracts)       |
+| WETH      | [0x08EE3541EEB3ba1d519EF4848D8B2A7d75BCE688](https://andromeda-explorer.metis.io/address/0x08EE3541EEB3ba1d519EF4848D8B2A7d75BCE688/contracts)       |
+| WBTC      | [0xA1377dbB30BFdc548eE8c9d7Fa3693E512dD6288](https://andromeda-explorer.metis.io/address/0xA1377dbB30BFdc548eE8c9d7Fa3693E512dD6288/contracts)       |
 
 More deployed addresses can be viewed in [deployments](deployments/) directory.
 
