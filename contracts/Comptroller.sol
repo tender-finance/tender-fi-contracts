@@ -83,6 +83,9 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
     // liquidationIncentiveMantissa must be no greater than this value
     uint internal constant liquidationIncentiveMaxMantissa = 1.5e18; // 1.5
 
+    // Comp Token Address
+    address public compAddress;
+
     constructor() public {
         admin = msg.sender;
     }
@@ -1409,11 +1412,16 @@ contract Comptroller is ComptrollerV3Storage, ComptrollerInterface, ComptrollerE
         return block.number;
     }
 
+    function setCompAddress(address _compAddress) external {
+        require(msg.sender == admin, "You are not an admin");
+        compAddress = _compAddress;
+    }
+
     /**
      * @notice Return the address of the COMP token
      * @return The address of COMP
      */
     function getCompAddress() public view returns (address) {
-        return 0x0Ed0Ca6872073E02cd3aE005BaF04bA43BE947fA;
+        return (compAddress);
     }
 }
