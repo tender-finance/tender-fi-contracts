@@ -8,32 +8,91 @@ const outputFilePath = `./deployments/${hre.network.name}.json`;
 
 const CTOKEN_DECIMALS = 8;
 
-export const CTOKENS = [
+const MAIN_NET_CTOKENS = [
   {
-    underlying: "0x5197487406336229a37D724710380278A1dca6b2",
-    name: "tTestDAI",
-    symbol: "tTestDAI",
+    underlying: "0xEA32A96608495e54156Ae48931A7c20f0dcc1a21",
+    name: "tUSDC Token",
+    symbol: "tUSDC",
+    decimals: CTOKEN_DECIMALS,
+    collateralFactor: ethers.utils.parseUnits("8", 17),
+    priceInUsd: "1",
+  },
+  {
+    underlying: "0x420000000000000000000000000000000000000a",
+    name: "tETH Token",
+    symbol: "tETH",
+    decimals: CTOKEN_DECIMALS,
+    collateralFactor: ethers.utils.parseUnits("7", 17),
+    priceInUsd: "1800",
+  },
+  {
+    underlying: "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
+    name: "tMetis Token",
+    symbol: "tMETIS",
+    decimals: CTOKEN_DECIMALS,
+    collateralFactor: ethers.utils.parseUnits("5", 17),
+    priceInUsd: "20",
+  },
+
+  {
+    underlying: "0xa5B55ab1dAF0F8e1EFc0eB1931a957fd89B918f4",
+    name: "tWBTC Token",
+    symbol: "tWBTC",
+    decimals: CTOKEN_DECIMALS,
+    collateralFactor: ethers.utils.parseUnits("7", 17),
+    priceInUsd: "1",
+  },
+  {
+    underlying: "0x4651B38e7ec14BB3db731369BFE5B08F2466Bd0A",
+    name: "tDAI Token",
+    symbol: "tDAI",
+    decimals: CTOKEN_DECIMALS,
+    collateralFactor: ethers.utils.parseUnits("8", 17),
+    priceInUsd: "1",
+  },
+  {
+    underlying: "0xbB06DCA3AE6887fAbF931640f67cab3e3a16F4dC",
+    name: "tUSDT Token",
+    symbol: "tUSDT",
+    decimals: CTOKEN_DECIMALS,
+    collateralFactor: ethers.utils.parseUnits("8", 17),
+    priceInUsd: "1",
+  },
+
+
+];
+
+
+
+
+const TEST_NET_CTOKENS = [
+  {
+    underlying: "1",
+    name: "tTestUSDC",
+    symbol: "tTestUSDC",
     decimals: CTOKEN_DECIMALS,
     collateralFactor: ethers.utils.parseUnits("9", 17),
     priceInUsd: "1",
   },
   {
-    underlying: "0xaD26Cc863cb1aaba691469246B4B4D65D951188e",
-    name: "tTestETH",
+    underlying: "0x420000000000000000000000000000000000000a",
+    name: "tETH",
     symbol: "tTestETH",
     decimals: CTOKEN_DECIMALS,
     collateralFactor: ethers.utils.parseUnits("7", 17),
     priceInUsd: "1800",
   },
   {
-    underlying: "0xAE745689b84ed533580610504Fe4baf38BEfc2C8",
-    name: "tTestWBTC",
-    symbol: "tTestWBTC",
+    underlying: "",
+    name: "tMetis",
+    symbol: "tTestMetis",
     decimals: CTOKEN_DECIMALS,
     collateralFactor: ethers.utils.parseUnits("1", 17),
-    priceInUsd: "29000",
+    priceInUsd: "200",
   },
 ];
+
+export const CTOKENS = MAIN_NET_CTOKENS
 
 export async function main() {
   const [deployer] = await hre.ethers.getSigners();
@@ -83,7 +142,7 @@ export async function main() {
 
     await unitrollerProxy._supportMarket(cErc20Immutable.address);
 
-    let confirmations = hre.network.name === "metis" ? 15 : 1;
+    let confirmations = hre.network.name === "metis" ? 5 : 1;
     await cErc20Immutable.deployTransaction.wait(confirmations);
 
     // Save to output

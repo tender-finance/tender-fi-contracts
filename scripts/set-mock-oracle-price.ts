@@ -30,7 +30,7 @@ export async function main() {
     let address = deployments[cToken.symbol];
     let value = cToken.priceInUsd;
 
-    console.log("Setting MockOracle price on tMetis", address, value);
+    console.log("Setting MockOracle price on", cToken.symbol, address, value);
 
     let tx = await oracle.mockUpdatePrice(
       address,
