@@ -1,0 +1,3 @@
+[submodule "price-oracle"]
+	path = price-oracle
+	url = https://github.com/agoradefi/price-oracle.git
