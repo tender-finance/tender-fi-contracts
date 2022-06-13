@@ -1,6 +1,6 @@
 # Money Market by AgoraDeFi
 
-Agora Money Market is a fork of [Compound Finance](https://compound.finance)'s money market with minor code changes which makes the money market decentralised and self sustained.
+Tender Money Market is a fork of [Compound Finance](https://compound.finance)'s money market with minor code changes which makes the money market decentralised and self sustained.
 
 The compound protocol was forked from commit [44b984b4871b015899f86fdcefde2d761ad83713](https://github.com/compound-finance/compound-protocol/tree/44b984b4871b015899f86fdcefde2d761ad83713).
 
@@ -28,5 +28,3 @@ CTokens
 | WBTC      | [0xA1377dbB30BFdc548eE8c9d7Fa3693E512dD6288](https://andromeda-explorer.metis.io/address/0xA1377dbB30BFdc548eE8c9d7Fa3693E512dD6288/contracts)       |
 
 More deployed addresses can be viewed in [deployments](deployments/) directory.
-
-The changes between Agora Money Market and Compound Protocol are listed in [agora-diff](agora-diff/) directory.
