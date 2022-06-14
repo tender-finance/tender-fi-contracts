@@ -26,5 +26,3 @@ CTokens
 | DAI      | [0x2a0DDDb5783E5Cd27821148eDe1B4c90EA739025](https://andromeda-explorer.metis.io/address/0x2a0DDDb5783E5Cd27821148eDe1B4c90EA739025/contracts)       |
 | WETH      | [0x08EE3541EEB3ba1d519EF4848D8B2A7d75BCE688](https://andromeda-explorer.metis.io/address/0x08EE3541EEB3ba1d519EF4848D8B2A7d75BCE688/contracts)       |
 | WBTC      | [0xA1377dbB30BFdc548eE8c9d7Fa3693E512dD6288](https://andromeda-explorer.metis.io/address/0xA1377dbB30BFdc548eE8c9d7Fa3693E512dD6288/contracts)       |
-
-More deployed addresses can be viewed in [deployments](deployments/) directory.
