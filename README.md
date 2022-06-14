@@ -1,4 +1,4 @@
-# Money Market by AgoraDeFi
+# Money Market by Tender finance
 
 Tender Money Market is a fork of [Compound Finance](https://compound.finance)'s money market with minor code changes which makes the money market decentralised and self sustained.
 
@@ -6,7 +6,7 @@ The compound protocol was forked from commit [44b984b4871b015899f86fdcefde2d761a
 
 ## Deployed Contracts
 
-Smart Contracts used in https://app.agoradefi.io
+Smart Contracts used in https://app.tender.fi
 
 Deployed & verified on Metis Andromeda network:
 
