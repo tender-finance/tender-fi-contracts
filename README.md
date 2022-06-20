@@ -23,6 +23,6 @@ CTokens
 | Metis      | [0xB01f3D0F5dD254280aC64C89aFB3363d05b91658](https://andromeda-explorer.metis.io/address/0xB01f3D0F5dD254280aC64C89aFB3363d05b91658/contracts)       |
 | USDC      | [0x18320599eA58B19B3FE12d383F2969C61C1B43F4](https://andromeda-explorer.metis.io/address/0x18320599eA58B19B3FE12d383F2969C61C1B43F4/contracts)       |
 | USDT      | [0x2a0DDDb5783E5Cd27821148eDe1B4c90EA739025](https://andromeda-explorer.metis.io/address/0x2a0DDDb5783E5Cd27821148eDe1B4c90EA739025/contracts)       |
-| DAI      | [0x2a0DDDb5783E5Cd27821148eDe1B4c90EA739025](https://andromeda-explorer.metis.io/address/0x2a0DDDb5783E5Cd27821148eDe1B4c90EA739025/contracts)       |
+| DAI      | [0x0fB0D26Ef8348c43d9eda482e180D54B0296DB22](https://andromeda-explorer.metis.io/address/0x0fB0D26Ef8348c43d9eda482e180D54B0296DB22/contracts)       |
 | WETH      | [0x08EE3541EEB3ba1d519EF4848D8B2A7d75BCE688](https://andromeda-explorer.metis.io/address/0x08EE3541EEB3ba1d519EF4848D8B2A7d75BCE688/contracts)       |
 | WBTC      | [0xA1377dbB30BFdc548eE8c9d7Fa3693E512dD6288](https://andromeda-explorer.metis.io/address/0xA1377dbB30BFdc548eE8c9d7Fa3693E512dD6288/contracts)       |
